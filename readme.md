@@ -1,5 +1,6 @@
 
 [![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#env=staging/https://github.com/uwidcit/pharm-backend)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 # Pharm Backend
 Backend application for pharmacy application
@@ -8,20 +9,21 @@ Backend application for pharmacy application
 * Python3/pip3
 * Packages listed in requirements.txt
 
-# Installing
-
+# Installing Dependencies
 ```
 $ pip3 install -r requirements.txt
 ```
 
-# Connected Services
-
-# Credentials
-
 # Running the Project
 Ensure the environment varable ENV is either set to 'staging' or 'production' then execute the following command
+
+_For development:_
 ```
 $ python3 -m App.main
+```
+_For production using gunicorn:_
+```
+$ gunicorn -w 4 wsgi:app
 ```
 
 # Deploying
