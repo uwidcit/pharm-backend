@@ -1,4 +1,4 @@
-from . import db
+from .user import db
 from . import Order
 
 class Invoice(db.Model):
