@@ -1,9 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
-from . import User
 
-class Admin(db.Model, User):
-    
+class Admin(db.Model):    
     type =  type = db.Column(db.String(50))
 
     def createAdmin():
