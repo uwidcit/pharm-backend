@@ -1,4 +1,4 @@
-from . import db
+from .user import db
 from datetime import datetime
 
 class Order(db.Model):
