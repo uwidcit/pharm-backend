@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
-from .user import db
+from . import User
 
 class Admin(db.Model, User):
     
