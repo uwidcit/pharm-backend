@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()
-from . import Order
+
 
 class Invoice(db.Model):
     id = db.Column(db.Integer, primary_key=True)
