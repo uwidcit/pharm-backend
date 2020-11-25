@@ -1,4 +1,4 @@
-from . import db
+from .user import db
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -7,14 +7,19 @@ class Product(db.Model):
     image = db.Column(db.String(300))
     unit_price = db.Column(db.Integer, nullable=False)
 
-    def addProduct():
-        return ""
+    def setDescription(self, desc):
+        self.description = desc
 
-    def updateProduct():
-        return ""
-
-    def deleteProduct():
-        return ""
+    def setImage(self, img):
+        self.image = img
+    
+    def setPrice(self, price):
+        self.unit_price = price
 
     def toDict(self):
-        return ""
+        return {
+            'name': self.name,
+            'description': self.description,
+            'image': self.image,
+            'unit_price': self.unit_price
+        }
