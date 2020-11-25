@@ -1,2 +1,4 @@
 node_modules
+environment.production.json
+environment.staging.json
 **/__pycache__/
