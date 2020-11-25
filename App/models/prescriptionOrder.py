@@ -1,4 +1,5 @@
-from .user import db
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 from . import Order
 
 class PrescriptionOrder(db.Model, Order):

@@ -1,4 +1,5 @@
-from . import User
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 from .user import db
 
 class Admin(db.Model, User):

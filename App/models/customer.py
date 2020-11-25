@@ -1,4 +1,5 @@
-from .user import db
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
 from . import User
 class Customer(db.Model, User):
 

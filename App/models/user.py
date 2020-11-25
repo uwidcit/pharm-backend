@@ -11,8 +11,8 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(120))
-
-   def encryptPassword(password): 
+    
+    def encryptPassword(password): 
         return generate_password_hash(password, method="sha256")
     
     def checkPassword(self,password):
