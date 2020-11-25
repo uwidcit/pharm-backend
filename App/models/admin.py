@@ -1,5 +1,5 @@
-from . import db
 from . import User
+from .user import db
 
 class Admin(db.Model, User):
     
