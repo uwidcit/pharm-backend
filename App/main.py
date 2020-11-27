@@ -1,12 +1,14 @@
 from flask import Flask
 from flask_jwt import JWT
+from flask import session
+#from flask_session import Session
 from datetime import timedelta 
 from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
 
 
 '''from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()'''
-from App.models import db
+from App.models.database import *
 
 from App import CONFIG
 
@@ -23,6 +25,8 @@ def create_app():
     app.config['UPLOADED_PHOTOS_DEST'] = CONFIG['uploadDir']
     app.config['JWT_EXPIRATION_DELTA'] = timedelta(days=CONFIG['JWTdeltaDays'])
     app.config['PREFERRED_URL_SCHEME'] = 'https'
+    #sess = Session()
+    #sess.init_app(app)
     photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
     configure_uploads(app, photos)
     db.init_app(app)
@@ -32,7 +36,7 @@ app = create_app()
 
 app.app_context().push()
 
-db.create_all(app=app)
+#db.create_all(app=app)
 
 app.register_blueprint(api_views)
 

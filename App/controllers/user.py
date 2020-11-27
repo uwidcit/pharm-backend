@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session, url_for
 
 from App.models import User
-from App.models.database import db
+from App.models.database import *
 
 def create_user( uwi_id, firstname, lastname, email, password):
     password = User.encryptPassword(password)
