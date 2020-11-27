@@ -1,7 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
-db = SQLAlchemy()
-
+'''from werkzeug.security import generate_password_hash, check_password_hash
+db = SQLAlchemy()'''
+from App.models.database import *
 class Admin(db.Model):    
     id = db.Column(db.Integer, primary_key=True)
     uwi_id = db.Column(db.Integer(), unique=True)

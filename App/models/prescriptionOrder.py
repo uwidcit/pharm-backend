@@ -1,6 +1,7 @@
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
+'''from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()'''
 from datetime import datetime
+from App.models.database import *
 
 class PrescriptionOrder(db.Model):
     id = db.Column(db.Integer, primary_key=True)

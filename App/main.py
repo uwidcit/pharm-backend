@@ -3,6 +3,9 @@ from flask_jwt import JWT
 from datetime import timedelta 
 from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
 
+
+'''from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()'''
 from App.models import db
 
 from App import CONFIG
@@ -28,6 +31,8 @@ def create_app():
 app = create_app()
 
 app.app_context().push()
+
+db.create_all(app=app)
 
 app.register_blueprint(api_views)
 
