@@ -2,13 +2,14 @@ from werkzeug.security import generate_password_hash, check_password_hash
 '''from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()'''
 from App.models.database import *
+from App.models.user import User
 class Customer(db.Model):
 
-    '''id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship("User", backref="admin", uselist=False)'''
-
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    user = db.relationship("user", backref="customer", uselist=False)
+
+    '''id = db.Column(db.Integer, primary_key=True)
     uwi_id = db.Column(db.Integer(), unique=True)
     first_name = db.Column(db.String(50), nullable=False) 
     last_name = db.Column(db.String(50), nullable=False)
@@ -31,6 +32,6 @@ class Customer(db.Model):
             'first_name': self.first_name,
             'last_name': self.last_name,
             'email': self.email
-        }
+        }'''
 
 

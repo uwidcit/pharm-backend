@@ -1,12 +1,13 @@
-from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()
+'''from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()'''
 
-from .order import Order
-from .user import User
-from .admin import Admin
-from .customer import Customer
-from .invoice import Invoice
-from .payment import Payment
-from .prescriptionOrder import PrescriptionOrder
-from .product import Product
 from .database import *
+from .order import *
+from .user import *
+from .admin import *
+from .customer import *
+from .invoice import *
+from .payment import *
+from .prescriptionOrder import *
+from .product import *
+
