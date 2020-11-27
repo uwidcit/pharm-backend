@@ -1,3 +1,6 @@
+from flask_sqlalchemy import SQLAlchemy
+db = SQLAlchemy()
+
 from .admin import Admin
 from .customer import Customer
 from .invoice import Invoice
