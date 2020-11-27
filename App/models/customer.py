@@ -23,15 +23,7 @@ class Customer(db.Model):
         return check_password_hash(self.password, password)
 
     def changePassword(self,password):
-        self.password = encryptPassword(password)
+        self.password = encryptPassword(password)'''
     
     def toDict(self):
-        return{
-
-            'uwi_id': self.uwi_id,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'email': self.email
-        }'''
-
-
+        return self.user.toDict()
