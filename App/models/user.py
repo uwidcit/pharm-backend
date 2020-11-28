@@ -1,5 +1,3 @@
-'''from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()'''
 from App.models.database import *
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -12,14 +10,11 @@ class User(db.Model):
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(120))
     
-    def encryptPassword(password): 
-        return generate_password_hash(password, method="sha256")
+    def setPassword(self, password): 
+        self.password = generate_password_hash(password, method="sha256")
     
     def checkPassword(self,password):
         return check_password_hash(self.password, password)
-
-    def changePassword(self,password):
-        self.password = encryptPassword(password)
     
     def toDict(self):
         return{

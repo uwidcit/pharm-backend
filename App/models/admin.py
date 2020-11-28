@@ -1,7 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-'''from werkzeug.security import generate_password_hash, check_password_hash
-db = SQLAlchemy()'''
-from App.models.database import *
+from .database import db
 from App.models.user import User
 
 class Admin(db.Model):    
@@ -13,7 +11,7 @@ class Admin(db.Model):
     password = db.Column(db.String(120))'''
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship("user", backref="admin", uselist=False)
+    user = db.relationship("User", backref="admin", uselist=False)
     type =  type = db.Column(db.String(50))
     
     '''def encryptPassword(password): 

@@ -1,5 +1,4 @@
-'''from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()'''
+from .database import db
 from datetime import datetime
 from App.models.database import *
 
@@ -16,15 +15,3 @@ class Order(db.Model):
     payment = db.relationship("payment", backref="order", uselist=False)
     date_placed = db.Column(db.DateTime(), nullable=False)
     collection_status = status = db.Column(db.String(50), nullable=False)
-
-    def placeOrder():
-        return ""
-
-    def updateOrder():
-        return ""
-    
-    def cancelOrder():
-        return ""
-
-    def toDict(self):
-        return ""

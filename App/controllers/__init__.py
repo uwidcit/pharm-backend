@@ -1,3 +1,3 @@
 from .user import *
-from .customer import *
-from .product import *
+# from .customer import *
+# from .product import *
