@@ -1,4 +1,4 @@
-from App.models.database import *
+from .database import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -9,6 +9,7 @@ class User(db.Model):
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(120))
+    token = db.Column(db.String(50))
     
     def setPassword(self, password): 
         self.password = generate_password_hash(password, method="sha256")

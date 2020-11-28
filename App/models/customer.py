@@ -1,11 +1,11 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from .database import db
-from App.models.user import User
+from .user import User
 class Customer(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    user = db.relationship("User", backref="customer", uselist=False)
+    #user = db.relationship("User",uselist=False,backref= "customer")
 
     '''id = db.Column(db.Integer, primary_key=True)
     uwi_id = db.Column(db.Integer(), unique=True)

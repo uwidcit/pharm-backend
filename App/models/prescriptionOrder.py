@@ -1,8 +1,6 @@
-'''from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()'''
 from datetime import datetime
-from App.models.database import *
-from App.models.order import Order
+from .database import db
+from .order import Order
 
 class PrescriptionOrder(db.Model):
     
@@ -17,7 +15,7 @@ class PrescriptionOrder(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
-    order = db.relationship("order", backref="prescriptionOrder", uselist=False)
+    #order = db.relationship("order", backref="prescriptionOrder", uselist=False)
     image = db.Column(db.String(300), nullable=False)
 
     def createPrescriptionOrder():
