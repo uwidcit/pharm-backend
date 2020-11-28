@@ -3,7 +3,10 @@ from flask_migrate import Migrate, MigrateCommand
 from App.main import app, db
 
 from App.controllers import (
-    create_user
+    create_user,
+    parse_csv,
+    get_products,
+    delete_products
 )
 
 manager = Manager(app)
@@ -28,6 +31,20 @@ def users():
 
     # newUser = create_user("1300","Michael", "Doe","michael@email.com","michael")
     # newCustomer = create_customer(newUser)
+
+@manager.command
+def addProducts():
+    print('Calling parse csv')
+    x = parse_csv()
+
+@manager.command
+def getProducts():
+    x = get_products()
+    print(x)
+
+@manager.command
+def deleteProducts():
+    x = delete_products()
 
 if __name__ == "__main__":
     manager.run()

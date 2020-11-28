@@ -5,5 +5,5 @@ from .customer import *
 # from .invoice import *
 # from .payment import *
 # from .prescriptionOrder import *
-# from .product import *
+from .product import *
 
