@@ -27,12 +27,37 @@ $ gunicorn -w 4 wsgi:app
 ```
 
 # Deploying
-App is configured to auto deploy master branch to heroku at [https://uwipharm.herokuapp.com](https://uwipharm.herokuapp.com)
+App will be configured to auto deploy master branch to heroku at [https://uwipharm.herokuapp.com](https://uwipharm.herokuapp.com)
+
+# Manage.py Commands
+
+Manage.py is a utility script for performing various tasks related to the project. You can use it to import and test any code in the project. 
+You just need create a manager command function, for example:
+
+```
+# inside manage.py
+
+
+@manager.command
+def hello():
+    print('hello')
+
+...    
+```
+
+Then execute the command by calling the funciton name as a parameter to the script
+
+```
+$ python3 manage.py hello
+```
 
 # Intializing the Database
 When connecting the project to a fresh empty database ensure the appropriate database credentials are set in environment.staging.json file then run the following command.
+
+When adding new models or changing models this command may also work. If it is unsuccessful you should use the migration command in the next section.
+
 ```
-$ python3 manage.py initdb
+$ python3 manage.py initDB
 ```
 
 # Database Migrations
