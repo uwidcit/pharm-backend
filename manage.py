@@ -4,7 +4,7 @@ from App.main import app, db
 
 from App.controllers import (
     create_user,
-    parse_csv,
+    parse_excel,
     get_products,
     delete_products,
     create_customer,
@@ -56,8 +56,8 @@ def products():
 
 @manager.command
 def addProducts():
-    print('Calling parse csv')
-    x = parse_csv()
+    print('Calling parse excel')
+    x = parse_excel()
 
 @manager.command
 def getProducts():

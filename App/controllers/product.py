@@ -2,7 +2,7 @@ from flask import redirect, render_template, request, session, url_for
 
 from App.models import Product
 from App.models.database import *
-from App import parsecsv
+from App import parse
 
 def create_product(name, desc, img, price):
     newProd = Product(name = name, description = desc, image = img, unit_price = price)
@@ -11,13 +11,16 @@ def create_product(name, desc, img, price):
     print("Successfully added")
     return newProd
 
-def parse_csv():
-    print('Product controller parse csv')
-    prodList = parsecsv.parse()
-    #print(prodList)
-    for p in prodList:
+def parse_excel():
+    print('Product controller parse excel')
+    prodList = parse.parse()
+    print(prodList)
+
+    #--------------------------------------------UNCOMMENT WHEN DB FIXED
+    #for p in prodList:
         #print(p[0],p[1],p[2],p[3])
-        x = create_product(p[0],p[1],p[2],p[3])
+        #x = create_product(p[0],p[1],p[2],p[3])
+
     return prodList
 
 def get_products():
@@ -34,6 +37,7 @@ def delete_products():
     db.session.commit()
     print('Rows deleted: ',x)
     return 0
+
 def get_all_products():
     list_of_products = []
     products = Product.query.all()
