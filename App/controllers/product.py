@@ -34,3 +34,13 @@ def delete_products():
     db.session.commit()
     print('Rows deleted: ',x)
     return 0
+def get_all_products():
+    list_of_products = []
+    products = Product.query.all()
+    for product in products:
+        list_of_products.append(product.toDict())
+    return list_of_products
+
+def get_product_by_name(name):
+    product = Product.query.filter_by(name = name).first()
+    return product.toDict()
