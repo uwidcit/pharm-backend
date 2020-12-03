@@ -64,6 +64,7 @@ def products():
 def addProducts():
     print('Calling parse excel')
     x = parse_excel()
+    print('Done')
 
 @manager.command
 def getProducts():

@@ -40,10 +40,10 @@ def parse():
         #print(cell)
         if cell:
             prod_dict['Code'].append(cell[0])
-            prod_dict['Product Name'].append(cell[1])
-            prod_dict['Category'].append(cell[2])
+            prod_dict['Product Name'].append(str(cell[1]))
+            prod_dict['Category'].append(str(cell[2]))
             prod_dict['Supplier Cost Price'].append(cell[3])
-            prod_dict['Supplier'].append(cell[4])
+            prod_dict['Supplier'].append(str(cell[4]))
             prod_dict['QoH'].append(cell[5])
             prod_dict['Stock Unit'].append(cell[6])
             prod_dict['Unit Retail'].append(cell[7])
