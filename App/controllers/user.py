@@ -10,3 +10,11 @@ def create_user( uwiid, firstname, lastname, email, password):
     db.session.commit()
     print("Successfully created")
     return newUser
+
+def get_users():
+    print('get_users')
+    users = User.query.all()
+    list_of_users = []
+    if users:
+        list_of_users = [u.toDict() for u in users]
+    return list_of_users

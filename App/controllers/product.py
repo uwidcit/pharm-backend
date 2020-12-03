@@ -4,8 +4,8 @@ from App.models import Product
 from App.models.database import *
 from App import parse
 
-def create_product(name, desc, img, price):
-    newProd = Product(name = name, description = desc, image = img, unit_price = price)
+def create_product(code,name, supplier, supplier_price, qoh, stock, unit_price, total):
+    newProd = Product(code = code, product_name = name,  supplier_cost_price = supplier_price, supplier = supplier, QoH = qoh, stock_unit = stock, unit_retail_price = unit_price, total_retail_price = total)
     db.session.add(newProd)
     db.session.commit()
     print("Successfully added")
@@ -46,5 +46,10 @@ def get_all_products():
     return list_of_products
 
 def get_product_by_name(name):
+<<<<<<< HEAD
     product = Product.query.filter_by(name = name).first()
     return product.toDict()
+=======
+    product = Product.query.filter_by(product_name = name).first()
+    return product.toDict()
+>>>>>>> 41a0feb25f6d6471b1aeeceb2bb7297794e0e9fa

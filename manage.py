@@ -11,7 +11,8 @@ from App.controllers import (
     create_product,
     create_admin,
     get_all_products,
-    get_product_by_name
+    get_product_by_name,
+    get_users
 )
 
 manager = Manager(app)
@@ -44,6 +45,11 @@ def users():
     newUser = create_user("1500","Pogue", "Perry","pogue@email.com","pogue")
     newAdmin = create_admin(newUser,"Pharmacist")
     #print(newAdmin.toDict())
+
+@manager.command
+def getUsers():
+    x = get_users()
+    print(x)
 
 @manager.command
 def products():
