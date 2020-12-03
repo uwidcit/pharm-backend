@@ -17,14 +17,17 @@ def parse_excel():
     #print(prodList)
 
     print('Inserting products in DB (This may take several minutes).....')
-    for p in prodList:
-        #print('Code: {}\nProduct Name: {}\nCategory: {}\nSupplier Cost Price: {}\nSupplier: {}\nQoH: {}\nStock Unit: {}\nUnit Retail: {}\nTotal Retail Price: {}\n'
-        #.format(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8]))
+    if prodList:
+        for p in prodList:
+            #print('Code: {}\nProduct Name: {}\nCategory: {}\nSupplier Cost Price: {}\nSupplier: {}\nQoH: {}\nStock Unit: {}\nUnit Retail: {}\nTotal Retail Price: {}\n'
+            #.format(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8]))
 
-        x = create_product(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
-
-    print('Finished!')
-    return prodList
+            x = create_product(p[0], p[1], p[2], p[3], p[4], p[5], p[6], p[7], p[8])
+        print('Finished!')
+        return 1
+    else:
+        print('No products parsed')
+        return 0
 
 def get_products():
     print('get_products')
