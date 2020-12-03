@@ -13,7 +13,8 @@ from App.models.database import *
 from App import CONFIG
 
 from App.views import (
-    api_views
+    api_views,
+    product_views
 )
 
 def create_app():
@@ -39,6 +40,7 @@ app.app_context().push()
 #db.create_all(app=app)
 
 app.register_blueprint(api_views)
+app.register_blueprint(product_views)
 
 ''' Set up JWT here (if using flask JWT)'''
 # def authenticate(uname, password):

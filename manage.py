@@ -29,6 +29,7 @@ def initDB():
 
 @manager.command
 def users():
+    print('Creating user')
     #newUser = create_user("1101", "Kim", "Jones","kim@email.com", "kimpass")
     #newCustomer = create_customer(newUser)
 
@@ -42,9 +43,13 @@ def users():
     #newUser = create_user("1400","Caleb", "Danvers","Caleb@email.com","caleb")
     #newAdmin = create_admin(newUser,"Pharmacist")
 
-    newUser = create_user("1500","Pogue", "Perry","pogue@email.com","pogue")
-    newAdmin = create_admin(newUser,"Pharmacist")
+    #newUser = create_user("1500","Pogue", "Perry","pogue@email.com","pogue")
+    #newAdmin = create_admin(newUser,"Pharmacist")
     #print(newAdmin.toDict())
+
+    newUser = create_user("1000","Shiv", "Singh","shiv@email.com","shivpass")
+    newAdmin = create_admin(newUser,"Pharmacist")
+    print(newAdmin.toDict())
 
 @manager.command
 def getUsers():
