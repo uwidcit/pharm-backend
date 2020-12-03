@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_jwt import JWT
+from flask_jwt import JWT, jwt_required, current_identity
 from flask import session
 #from flask_session import Session
 from datetime import timedelta 
@@ -10,11 +10,16 @@ from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
 db = SQLAlchemy()'''
 from App.models.database import *
 
+from App.models.user import *
+
+from App.controllers.auth import *
+
 from App import CONFIG
 
 from App.views import (
     api_views,
-    product_views
+    product_views,
+    auth_views
 )
 
 def create_app():
@@ -41,17 +46,10 @@ app.app_context().push()
 
 app.register_blueprint(api_views)
 app.register_blueprint(product_views)
+app.register_blueprint(auth_views)
 
-''' Set up JWT here (if using flask JWT)'''
-# def authenticate(uname, password):
-#   pass
+jwt = JWT(app, authenticate, identity)
 
-# #Payload is a dictionary which is passed to the function by Flask JWT
-# def identity(payload):
-#   pass
-
-# jwt = JWT(app, authenticate, identity)
-''' End JWT Setup '''
 
 
 if __name__ == '__main__':

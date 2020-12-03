@@ -12,7 +12,8 @@ from App.controllers import (
     create_admin,
     get_all_products,
     get_product_by_name,
-    get_users
+    get_users,
+    test_auth
 )
 
 manager = Manager(app)
@@ -50,6 +51,12 @@ def users():
     newUser = create_user("1000","Shiv", "Singh","shiv@email.com","shivpass")
     newAdmin = create_admin(newUser,"Pharmacist")
     print(newAdmin.toDict())
+
+@manager.command
+def test():
+    print('Test auth')
+    x = test_auth(1000,'shivpass')
+    print(x)
 
 @manager.command
 def getUsers():

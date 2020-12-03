@@ -13,4 +13,5 @@ def display_event():
 
     print('Getting all products')
     prodList = get_products()
-    return json.dumps(prodList)
+    return jsonify(prodList)
+    #return json.dumps(prodList)
