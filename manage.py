@@ -38,9 +38,17 @@ def users():
     #newUser = create_user("1400","Caleb", "Danvers","Caleb@email.com","caleb")
     #newAdmin = create_admin(newUser,"Pharmacist")
 
-    newUser = create_user("1500","Pogue", "Perry","pogue@email.com","pogue")
-    newAdmin = create_admin(newUser,"Pharmacist")
-    #print(newAdmin.toDict())
+    #newUser = create_user("1500","Pogue", "Perry","pogue@email.com","pogue")
+    #newAdmin = create_admin(newUser,"Pharmacist")
+
+    newUser = create_user("1600","Reid", "Garwin","reid@email.com","reid")
+    newAdmin = create_admin(newUser,"Cashier")
+
+    newUser = create_user("1700","Tyler", "Simms","tyler@email.com","tyler")
+    newCustomer = create_customer(newUser)
+
+    print(newCustomer.toDict())
+    print(newAdmin.toDict())
 
 @manager.command
 def products():
