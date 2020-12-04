@@ -9,13 +9,6 @@ from App.controllers import (
     authenticate
 )
 
-@auth_views.route('/auth', methods=["POST"])
-def auth():
-    uwi_id = request.form["uwi_id"]
-    password = request.form["password"]
-    token = authenticate(uwi_id, password)
-    return json.dumps(token)
-
 @auth_views.route('/test')
 @jwt_required()
 def protected():

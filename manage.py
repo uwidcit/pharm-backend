@@ -53,12 +53,6 @@ def users():
     print(newAdmin.toDict())
 
 @manager.command
-def test():
-    print('Test auth')
-    x = test_auth(1000,'shivpass')
-    print(x)
-
-@manager.command
 def getUsers():
     x = get_users()
     print(x)
