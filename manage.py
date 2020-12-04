@@ -10,7 +10,6 @@ from App.controllers import (
     create_customer,
     create_product,
     create_admin,
-    get_all_products,
     get_product_by_name,
     get_users,
     test_auth
@@ -46,20 +45,8 @@ def users():
 
     #newUser = create_user("1500","Pogue", "Perry","pogue@email.com","pogue")
     #newAdmin = create_admin(newUser,"Pharmacist")
-<<<<<<< HEAD
-
-    newUser = create_user("1600","Reid", "Garwin","reid@email.com","reid")
-    newAdmin = create_admin(newUser,"Cashier")
-
-    newUser = create_user("1700","Tyler", "Simms","tyler@email.com","tyler")
-    newCustomer = create_customer(newUser)
-
-    print(newCustomer.toDict())
-    print(newAdmin.toDict())
-=======
     #print(newAdmin.toDict())
->>>>>>> a60d805c9cc48619e4a540e740ccdf548a21d8a0
-
+s
     newUser = create_user("1000","Shiv", "Singh","shiv@email.com","shivpass")
     newAdmin = create_admin(newUser,"Pharmacist")
     print(newAdmin.toDict())
