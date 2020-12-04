@@ -14,12 +14,8 @@ class Order(db.Model):
     payment = db.relationship("Payment", foreign_keys=[payment_id])
     date_placed = db.Column(db.DateTime(), nullable=False)
     pickup_status = db.Column(db.String(50), nullable=False)
-
-    def placeOrder():
-        return ""
-
-    def updateOrder():
-        return ""
     
-    def cancelOrder():
-        return ""
+    def toDict(self):
+        return{
+            "order_number": self.order_number
+        }
