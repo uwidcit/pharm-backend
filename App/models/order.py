@@ -13,7 +13,7 @@ class Order(db.Model):
     payment_id = db.Column(db.Integer, db.ForeignKey('payment.id'), nullable=False)
     payment = db.relationship("Payment", foreign_keys=[payment_id])
     date_placed = db.Column(db.DateTime(), nullable=False)
-    pickup_status = status = db.Column(db.String(50), nullable=False)
+    pickup_status = db.Column(db.String(50), nullable=False)
 
     def placeOrder():
         return ""
