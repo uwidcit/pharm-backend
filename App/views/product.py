@@ -7,11 +7,8 @@ from App.controllers import (
     get_products
 )
 
-@product_views.route('/products/', methods=["GET"])
+@product_views.route('/products', methods=["GET"])
 def display_event():
-    print('get_products view')
-
-    print('Getting all products')
     prodList = get_products()
     return jsonify(prodList)
     #return json.dumps(prodList)

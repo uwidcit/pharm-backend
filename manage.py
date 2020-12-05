@@ -46,7 +46,6 @@ def users():
     #newUser = create_user("1500","Pogue", "Perry","pogue@email.com","pogue")
     #newAdmin = create_admin(newUser,"Pharmacist")
     #print(newAdmin.toDict())
-s
     newUser = create_user("1000","Shiv", "Singh","shiv@email.com","shivpass")
     newAdmin = create_admin(newUser,"Pharmacist")
     print(newAdmin.toDict())
