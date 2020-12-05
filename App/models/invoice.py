@@ -6,12 +6,9 @@ class Invoice(db.Model):
     invoice_number = db.Column(db.Integer, nullable = False)
     order_id = db.Column(db.Integer, db.ForeignKey('order.id'), nullable=False)
     order = db.relationship("Order", foreign_keys=[order_id])
-
-    def generateInvoice():
-        return ""
-
-    def updateInvoice():
-        return ""
     
     def toDict(self):
-        return ""
+        return {
+            "invoice_number": self.invoice_number,
+            "order_number": self.order.order_number
+        }
