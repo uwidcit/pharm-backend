@@ -29,12 +29,32 @@ def parse_excel():
         print('No products parsed')
         return 0
 
-def get_products():
+def get_products(search,limit,offset):
     print('get_products')
-    products = Product.query.all()
+
+    if limit is None:
+        limit = 15
+    
+    if offset is None:
+        offset = 0
+
+    print('Search:',search)
+    print('Limit:',limit)
+    print('Offset:',offset)
+
+    products = []
     list_of_products = []
+
+    if search:
+        search_term = "%{}%".format(search.upper())
+        print('SQL search term:',search_term)
+        products = Product.query.filter(Product.product_name.like(search_term)).order_by(Product.product_name).offset(offset).limit(limit).all()
+    else:
+        products = Product.query.order_by(Product.product_name).offset(offset).limit(limit).all()
+    
     if products:
         list_of_products = [p.toDict() for p in products]
+
     return list_of_products
 
 def delete_products():
