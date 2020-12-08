@@ -11,24 +11,28 @@ from App.controllers import (
 #Requires a cart to already be created in the DB
 #You can do so by using the createCart function in the manage script
 #I created cart with ID 2 already for the demo
-@cart_views.route('/cart/', methods=['GET', 'POST'])
+@cart_views.route('/cart', methods=['POST'])
 def cart():
     print('cart view')
+    
+    cartJson = request.json
+    if cartJson:
+        print('Cart json:',cartJson)
 
-    cart = request.args.get('cart')
-    if cart is None:
-        cart = 2
-    print('Cart:',cart)
+        cart = cartJson['cart_id']
+        print('Cart:',cart)
 
-    product = request.args.get('product')
-    print('Product:',product)
+        product = cartJson['product_id']
+        print('Product:',product)
 
-    quantity = request.args.get('quantity')
-    print('Quantity:',quantity)
+        quantity = cartJson['quantity']
+        print('Quantity:',quantity)
 
-    if cart and product and quantity:
-        print('Adding items to cart')
-        cartItem = create_cart_item(cart,product,quantity)
+        if cart and product and quantity:
+            print('Adding items to cart')
+            cartItem = create_cart_item(cart,product,quantity)
 
-    cart = get_cart_items(cart)
-    return jsonify(cart)
+        cartList = get_cart_items(cart)
+        return jsonify(cartList)
+    else:
+        return 400
