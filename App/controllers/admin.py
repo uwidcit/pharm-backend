@@ -7,5 +7,5 @@ def create_admin(newUser, type):
     newAdmin = Admin(user_id = newUser.id, type = type)
     db.session.add(newAdmin)
     db.session.commit()
-    print("Admin successfully Created")
+    print("Admin successfully created")
     return newAdmin

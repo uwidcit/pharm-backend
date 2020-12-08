@@ -11,7 +11,13 @@ from App.controllers import (
     create_product,
     create_admin,
     get_product_by_name,
-    get_users
+    get_users,
+    create_cart,
+    get_cart,
+    set_checked_out,
+    create_cart_item,
+    delete_cart_item,
+    get_cart_items
 )
 
 manager = Manager(app)
@@ -25,6 +31,42 @@ manager.add_command('db', MigrateCommand)
 def initDB():
     db.create_all(app=app)
     print('database initialized!')
+
+@manager.command
+def createCart():
+    x = create_cart(1)
+    print('Cart: ', x)
+
+@manager.command
+def getCart():
+    x = get_cart(1)
+    print('Cart: ', x)
+
+@manager.command
+def setCheckedOut():
+    x = set_checked_out(1)
+    print('Result: ', x)
+
+@manager.command
+def addCartItem():
+    x = create_cart_item(2,1,5)
+    print('Cart item: ', x.toDict())
+
+    x = create_cart_item(2,2,7)
+    print('Cart item: ', x.toDict())
+
+    x = create_cart_item(2,3,9)
+    print('Cart item: ', x.toDict())
+
+@manager.command
+def getCartItems():
+    x = get_cart_items(2)
+    print('Cart items:', x)
+
+@manager.command
+def removeCartItem():
+    x = delete_cart_item(2,2)
+    print('Result:', x)
 
 @manager.command
 def users():
@@ -47,8 +89,16 @@ def users():
     #print(newAdmin.toDict())
 
     newUser = create_user("1000","Shiv", "Singh","shiv@email.com","shivpass")
+    print(newUser.toDict())
     newAdmin = create_admin(newUser,"Pharmacist")
     print(newAdmin.toDict())
+
+    newUser = create_user("2000", "Arun", "Singh","arun@email.com", "arunpass")
+    print(newUser.toDict())
+    newCustomer = create_customer(newUser)
+    print(newCustomer.toDict())
+
+    
 
 @manager.command
 def getUsers():

@@ -7,5 +7,5 @@ def create_customer(newUser):
     newCust = Customer(user_id = newUser.id)
     db.session.add(newCust)
     db.session.commit()
-    print("Successfully Created")
+    print("Customer successfully created")
     return newCust
