@@ -26,6 +26,9 @@ def cart():
     quantity = request.args.get('quantity')
     print('Quantity:',quantity)
 
-    cartItem = create_cart_item(cart,product,quantity)
+    if cart and product and quantity:
+        print('Adding items to cart')
+        cartItem = create_cart_item(cart,product,quantity)
+
     cart = get_cart_items(cart)
     return jsonify(cart)
