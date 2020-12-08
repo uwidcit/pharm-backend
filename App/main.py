@@ -19,7 +19,8 @@ from App import CONFIG
 from App.views import (
     api_views,
     product_views,
-    auth_views
+    auth_views,
+    cart_views
 )
 
 def create_app():
@@ -47,6 +48,7 @@ app.app_context().push()
 app.register_blueprint(api_views)
 app.register_blueprint(product_views)
 app.register_blueprint(auth_views)
+app.register_blueprint(cart_views)
 
 jwt = JWT(app, authenticate, identity)
 
