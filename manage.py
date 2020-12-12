@@ -17,7 +17,8 @@ from App.controllers import (
     set_checked_out,
     create_cart_item,
     delete_cart_item,
-    get_cart_items
+    get_cart_items,
+    get_profile
 )
 
 manager = Manager(app)
@@ -128,6 +129,11 @@ def getProducts():
 @manager.command
 def deleteProducts():
     x = delete_products()
+
+@manager.command
+def getProfile():
+    x = get_profile(1000)
+    print(x)
 
 if __name__ == "__main__":
     manager.run()

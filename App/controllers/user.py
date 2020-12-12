@@ -11,8 +11,13 @@ def create_user( uwiid, firstname, lastname, email, password):
     print("User successfully created")
     return newUser
 
+def get_profile(searchTerm):
+    user = User.query.filter_by(uwi_id = searchTerm).first()
+    return user.toDict()
+
 def get_users():
     print('get_users')
+
     users = User.query.all()
     list_of_users = []
     if users:
