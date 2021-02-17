@@ -1,3 +1,4 @@
+#Not in use yet as payment is not a feature available for project scope
 from datetime import datetime
 from .database import db
 

@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session, url_for
 
 from App.models import ( Admin )
-from App.models.database import *
+from App.models.database import db
 
 def create_admin(newUser, type):
     newAdmin = Admin(user_id = newUser.id, type = type)

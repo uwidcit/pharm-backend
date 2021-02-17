@@ -46,13 +46,13 @@ def users():
     #newUser = create_user("1500","Pogue", "Perry","pogue@email.com","pogue")
     #newAdmin = create_admin(newUser,"Pharmacist")
     #print(newAdmin.toDict())
-    newUser = create_user("1000","Shiv", "Singh","shiv@email.com","shivpass")
+    newUser = create_user("Shiv", "Singh","shiv@email.com","shivpass")
     newAdmin = create_admin(newUser,"Pharmacist")
     print(newAdmin.toDict())
 
 @manager.command
 def getUsers():
-    x = get_users()
+    x = cl()
     print(x)
 
 @manager.command

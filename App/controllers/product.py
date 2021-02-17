@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session, url_for
 
 from App.models import Product
-from App.models.database import *
+from App.models.database import db
 from App import parse
 
 def create_product(code, name, category, supplier_price, supplier, qoh, stock, unit_price, total):

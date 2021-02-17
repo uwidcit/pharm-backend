@@ -10,9 +10,7 @@ class Order(db.Model):
     product = db.relationship("Product", foreign_keys=[product_id])
     item_count = db.Column(db.Integer, nullable=False)
     order_total = db.Column(db.Integer, nullable=False)
-    payment_id = db.Column(db.Integer, db.ForeignKey('payment.id'), nullable=False)
-    payment = db.relationship("Payment", foreign_keys=[payment_id])
-    date_placed = db.Column(db.DateTime(), nullable=False)
+    date_placed = db.Column(db.DateTime, nullable=False)
     pickup_status = db.Column(db.String(50), nullable=False)
     
     def toDict(self):

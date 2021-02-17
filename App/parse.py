@@ -3,14 +3,14 @@ import pandas as pd
 
 def parse():
     print('In parse script')
-    loc = 'App/productcatglisting.xls'
+    loc = 'App/pharmdb.xlsx'
     wb = xlrd.open_workbook(loc)
     sheet = wb.sheet_by_index(0)
 
     num_cols = sheet.ncols
 
     prod_dict = {'Code':[],'Product Name': [],'Category':[],'Supplier Cost Price':[],'Supplier':[],'QoH':[],
-    'Stock Unit':[],'Unit Retail':[],'Total Retail Price':[]}
+    'Stock Unit':[],'Unit Retail':[],'Total Retail Price':[], 'Product Image': []}
 
     cell = []
 
@@ -18,20 +18,18 @@ def parse():
     #0 - empty string
     #1 - unicode string
     #2 - float
-    for row_idx in range(1, sheet.nrows - 1):
+    for row_idx in range(1, sheet.nrows):
         #print ('-'*40)
         #print ('Row: %s' % row_idx)
 
-        for col_idx in range(0, num_cols - 1):
+        for col_idx in range(0, num_cols):
             cell_obj = sheet.cell(row_idx, col_idx)
             cell_val = sheet.cell_value(row_idx, col_idx) 
             cell_type = sheet.cell_type(row_idx, col_idx)  
             #print ('Column: [%s] value: [%s]' % (col_idx, cell_obj))
             #print(cell_val,cell_type)
-            if(col_idx == 0 and cell_val != 'Code' and cell_type != 2):
-                #print('Category:',cell_val)
-                break
-            elif(cell_val == 'Code'):
+ 
+            if(cell_val == 'Code'):
                 break
             else:
                 #print ('Column: [%s] value: [%s]' % (col_idx, cell_obj))
@@ -48,7 +46,7 @@ def parse():
             prod_dict['Stock Unit'].append(cell[6])
             prod_dict['Unit Retail'].append(cell[7])
             prod_dict['Total Retail Price'].append(cell[8])
-
+            prod_dict['Product Image'].append("test.com")
         cell = []
     
     df = pd.DataFrame(data=prod_dict)

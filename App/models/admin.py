@@ -7,7 +7,6 @@ class Admin(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship("User", foreign_keys=[user_id])
-    
     type =  type = db.Column(db.String(50))
     
     def toDict(self):        

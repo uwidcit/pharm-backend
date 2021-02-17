@@ -11,6 +11,7 @@ class Product(db.Model):
     stock_unit = db.Column(db.Float, nullable = False)
     unit_retail_price = db.Column(db.Float, nullable = False)
     total_retail_price = db.Column(db.Float, nullable=False)
+    image = db.Column(db.String(300), nullable=True)
     
     def setPrice(self, price):
         self.unit_retail_price = price
@@ -25,5 +26,6 @@ class Product(db.Model):
             "QoH": self.QoH,
             "stock_unit": self.stock_unit,
             "unit_retail_price": self.unit_retail_price,
-            "total_retail_price": self.total_retail_price
+            "total_retail_price": self.total_retail_price,
+            "image" : self.image,
         }
