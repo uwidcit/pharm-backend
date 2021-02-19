@@ -29,6 +29,37 @@ def parse_excel():
         print('No products parsed')
         return 0
 
+ROWS_PER_PAGE = 20
+def get_products_page(page):
+    print('getting 20 products')
+    list_of_products = []
+    page = request.args.get('page', page, type=int)
+    query = Product.query.paginate(page=page, per_page=ROWS_PER_PAGE, error_out=False)
+    products = query.items
+    if products:
+        list_of_products = [product.toDict() for product in products]
+    return list_of_products
+
+def get_page_details(page):
+    page = request.args.get('page', page, type=int)
+    query = Product.query.paginate(page=page, per_page=ROWS_PER_PAGE, error_out=False)
+    #total_products = query.total
+    total_pages = query.pages
+    has_next = query.has_next
+    has_prev = query.has_prev
+    page_details = [{
+        "total_pages" : total_pages,
+        "has_prev" : has_prev,
+        "has_next" : has_next,
+    }]
+    return page_details
+    
+def get_product_categories():
+    query = Product.query.with_entities(Product.category).distinct()
+    titles = [row.category for row in query.all()]
+    return titles
+
+
 def get_products():
     print('get_products')
     products = Product.query.all()

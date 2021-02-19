@@ -4,6 +4,7 @@ from flask import session
 #from flask_session import Session
 from datetime import timedelta 
 from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
+from flask_cors import CORS
 
 
 '''from flask_sqlalchemy import SQLAlchemy
@@ -24,6 +25,7 @@ from App.views import (
 
 def create_app():
     app = Flask(__name__, static_url_path='')
+    cors = CORS(app, resources={r"/*": {"origins": "*"}})
     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+CONFIG['dbuser']+':'+CONFIG['dbpassword']+'@'+CONFIG['dbhost']+'/'+CONFIG['dbname']
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["TEMPLATES_AUTO_RELOAD"] = True
