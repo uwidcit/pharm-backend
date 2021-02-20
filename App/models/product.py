@@ -28,4 +28,5 @@ class Product(db.Model):
             "unit_retail_price": self.unit_retail_price,
             "total_retail_price": self.total_retail_price,
             "image" : self.image,
+            "slug" : self.product_name.lower().replace(' ', '-')
         }
