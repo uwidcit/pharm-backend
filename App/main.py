@@ -20,7 +20,10 @@ from App import CONFIG
 from App.views import (
     api_views,
     product_views,
-    auth_views
+    auth_views,
+    search_view,
+    order_views,
+    customer_views
 )
 
 def create_app():
@@ -33,6 +36,7 @@ def create_app():
     app.config['UPLOADED_PHOTOS_DEST'] = CONFIG['uploadDir']
     app.config['JWT_EXPIRATION_DELTA'] = timedelta(days=CONFIG['JWTdeltaDays'])
     app.config['PREFERRED_URL_SCHEME'] = 'https'
+    app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
     #sess = Session()
     #sess.init_app(app)
     photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
@@ -49,10 +53,11 @@ app.app_context().push()
 app.register_blueprint(api_views)
 app.register_blueprint(product_views)
 app.register_blueprint(auth_views)
+app.register_blueprint(search_view)
+app.register_blueprint(order_views)
+app.register_blueprint(customer_views)
 
-jwt = JWT(app, authenticate, identity)
-
-
+jwt = JWT(app, authenticate, identity) 
 
 if __name__ == '__main__':
     print('Application running in '+CONFIG['ENV']+' mode')

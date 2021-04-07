@@ -5,3 +5,5 @@ from .admin import *
 from .auth import *
 from .invoice import *
 from .pharmacy import *
+from .order import *
+from .orderProduct import *

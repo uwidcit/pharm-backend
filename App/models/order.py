@@ -1,19 +1,24 @@
 from .database import db
 from datetime import datetime
+import json
 
 class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    order_number = db.Column(db.Integer, nullable=False)
-    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
-    customer = db.relationship("Customer", foreign_keys=[customer_id])
-    product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
-    product = db.relationship("Product", foreign_keys=[product_id])
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship("User", back_populates="orders")
     item_count = db.Column(db.Integer, nullable=False)
     order_total = db.Column(db.Integer, nullable=False)
-    date_placed = db.Column(db.DateTime, nullable=False)
+    date_placed = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     pickup_status = db.Column(db.String(50), nullable=False)
-    
+    products = db.relationship("OrderProduct", back_populates="order")
+
     def toDict(self):
         return{
-            "order_number": self.order_number
+            "id" : self.id,
+            "user" : self.user.toDict(),
+            "item_count": self.item_count,
+            "order_total": self.order_total,
+            "date_placed": self.date_placed.strftime("%a, %d %b, %Y"),
+            "status": self.pickup_status,
+            "products": [OrderProduct.product.toDict() for OrderProduct in self.products]
         }

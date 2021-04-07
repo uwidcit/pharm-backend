@@ -2,16 +2,17 @@ from .database import db
 
 class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    code = db.Column(db.Float, unique=True, nullable=False)
+    code = db.Column(db.Integer, unique=True, nullable=False)
     product_name = db.Column(db.String(300), nullable=False)
     category = db.Column(db.String(300), nullable=False)     
-    supplier_cost_price = db.Column(db.Float, nullable=False)
+    supplier_cost_price = db.Column(db.Float(decimal_return_scale=2), nullable=False)
     supplier = db.Column(db.String(200), nullable = False)    
-    QoH = db.Column(db.Float, nullable = False)
-    stock_unit = db.Column(db.Float, nullable = False)
-    unit_retail_price = db.Column(db.Float, nullable = False)
-    total_retail_price = db.Column(db.Float, nullable=False)
+    QoH = db.Column(db.Integer, nullable = False)
+    stock_unit = db.Column(db.Integer, nullable = False)
+    unit_retail_price = db.Column(db.Float(decimal_return_scale=2), nullable = False)
+    total_retail_price = db.Column(db.Float(decimal_return_scale=2), nullable=False)
     image = db.Column(db.String(300), nullable=True)
+    orders = db.relationship("OrderProduct", back_populates="product")
     
     def setPrice(self, price):
         self.unit_retail_price = price
@@ -29,4 +30,5 @@ class Product(db.Model):
             "total_retail_price": self.total_retail_price,
             "image" : self.image,
             "slug" : self.product_name.lower().replace(' ', '-')
+            # uncomment for all orders containing the product "orders": [OrderProduct.order.toDict() for OrderProduct in self.orders]
         }

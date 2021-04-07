@@ -7,17 +7,11 @@ from datetime import datetime, timedelta
 
 from flask import current_app
 
-def authenticate(uwi_id, password):
-    user = User.query.filter_by(uwi_id=uwi_id).first()
+def authenticate(email, password):
+    user = User.query.filter_by(email=email).first()
     if user and user.checkPassword(password):
         return user
 
 #Payload is a dictionary which is passed to the function by Flask JWT
 def identity(payload):
     return User.query.get(payload['identity'])
-
-def test_auth(id,psw):
-    print('Auth controller test')
-    token = authenticate(id,psw)
-    return token
-

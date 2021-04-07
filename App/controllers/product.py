@@ -74,7 +74,21 @@ def delete_products():
     db.session.commit()
     print('Rows deleted: ',x)
     return 0
-    
-def get_product_by_name(name):
-    product = Product.query.filter_by(product_name = name).first()
-    return product.toDict()
+
+def get_products_by_term(term):
+    list_of_products = []
+    products = Product.query.filter(
+        Product.product_name.contains(term) 
+        | Product.category.contains(term) 
+        | Product.code.contains(term) 
+        | Product.supplier.contains(term)
+    )
+    if products:
+        list_of_products = [p.toDict() for p in products]
+    return list_of_products
+
+def get_product_by_slug(p_slug):
+    print("getting product")
+    p_name = p_slug.upper().replace('-', ' ')
+    product = Product.query.filter(Product.product_name == p_name).first() # if this returns a user, then the email already exists in database
+    return product
