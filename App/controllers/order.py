@@ -1,9 +1,7 @@
-from flask import redirect, render_template, request, session, url_for
-
 from App.models import ( Order )
 from App.models.database import db
 
-def create_order(customer, item_count, order_total, status):
+def create_cust_order(customer, item_count, order_total, status):
     newOrder = Order(user_id = customer.id, item_count = item_count, order_total = order_total, pickup_status = status)
     print("Successfully Created")
     db.session.add(newOrder)
@@ -23,6 +21,15 @@ def get_order_by_id(order_id):
     order = Order.query.filter(Order.id == order_id).first() 
     return order
 
+def get_orders_by_user(email):
+    print("getting user's orders")
+    orders = Order.query.filter(Order.user.has(email = email)).all()
+    list_of_orders = []
+    if orders:
+        list_of_orders = [o.toDict() for o in orders]
+    return list_of_orders
+
+
 def get_orders_by_term(term):
     list_of_orders = []
     orders = Order.query.filter(
@@ -37,3 +44,11 @@ def get_orders_by_term(term):
     if orders:
         list_of_orders = [o.toDict() for o in orders]
     return list_of_orders
+
+def update_order_by_id(order_id, status):
+    print("updating order")
+    order = Order.query.filter(Order.id == order_id).first()
+    order.pickup_status = status
+    db.session.add(order)
+    db.session.commit()
+    return order

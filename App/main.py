@@ -1,11 +1,10 @@
 from flask import Flask
-from flask_jwt import JWT, jwt_required, current_identity
+from flask_jwt import JWT
 from flask import session
-#from flask_session import Session
 from datetime import timedelta 
 from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
 from flask_cors import CORS
-
+import pyrebase
 
 '''from flask_sqlalchemy import SQLAlchemy
 db = SQLAlchemy()'''
@@ -25,6 +24,27 @@ from App.views import (
     order_views,
     customer_views
 )
+
+config = {
+    "apiKey": "AIzaSyBruhgawt6_iJxE-HPakjMtrXRrjxeVrhA",
+    "authDomain": "uwi-pharmacy-ecommerce.firebaseapp.com",
+    "databaseURL": "https://uwi-pharmacy-ecommerce-default-rtdb.firebaseio.com/",
+    "projectId": "uwi-pharmacy-ecommerce",
+    "storageBucket": "uwi-pharmacy-ecommerce.appspot.com",
+    "messagingSenderId": "94896011302",
+    "appId": "1:94896011302:web:22dcf5253859ce907c0ee7",
+    "measurementId": "G-F595XTT5R4"
+  }
+
+firebase = pyrebase.initialize_app(config)
+
+storage = firebase.storage()
+
+#to store image
+#storage.child("image-url-on-firebase").put("image-name.jpg") (png whatever file extension")
+
+#to download image
+#storage.child("image-url-on-firebase").download("image-name.jpg")
 
 def create_app():
     app = Flask(__name__, static_url_path='')

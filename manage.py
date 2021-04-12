@@ -8,7 +8,6 @@ from App.controllers import (
     delete_products,
     get_users,
     create_user,
-    create_admin,
 )
 
 manager = Manager(app)
@@ -24,9 +23,10 @@ def initDB():
     print('database initialized!')
 
 @manager.command
-def addAdmin(fname, lname, email, password):
-    user = create_user(fname, lname, email, password)
-    admin = create_admin(user)
+def addAdmin():
+
+    admin = create_user("Andhra", "Maraj", 
+    "andhra.maraj@gmail.com", "andhrapass", None, None, role = 2)
     return admin
 
 @manager.command

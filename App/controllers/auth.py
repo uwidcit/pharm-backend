@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, session, url_for
 import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
-from App.models import User, Admin, Customer
+from App.models import User
 from App.models.database import db
 from datetime import datetime, timedelta
 

@@ -4,7 +4,7 @@ from App.models import Product
 from App.models.database import db
 from App import parse
 
-def create_product(code, name, category, supplier_price, supplier, qoh, stock, unit_price, total):
+def create_product(code, name, category, supplier_price, supplier, qoh, stock, unit_price, total, image = None):
     newProd = Product(code = code, product_name = name, category = category, supplier_cost_price = supplier_price, supplier = supplier, QoH = qoh, stock_unit = stock, unit_retail_price = unit_price, total_retail_price = total)
     db.session.add(newProd)
     db.session.commit()
@@ -14,7 +14,6 @@ def create_product(code, name, category, supplier_price, supplier, qoh, stock, u
 def parse_excel():
     print('Product controller parse excel')
     prodList = parse.parse()
-    #print(prodList)
 
     print('Inserting products in DB (This may take several minutes).....')
     if prodList:
@@ -59,7 +58,6 @@ def get_product_categories():
     titles = [row.category for row in query.all()]
     return titles
 
-
 def get_products():
     print('get_products')
     products = Product.query.all()
@@ -92,3 +90,13 @@ def get_product_by_slug(p_slug):
     p_name = p_slug.upper().replace('-', ' ')
     product = Product.query.filter(Product.product_name == p_name).first() # if this returns a user, then the email already exists in database
     return product
+
+def delete_product_by_slug(p_slug):
+    print("deleting product")
+    p_name = p_slug.upper().replace('-', ' ')
+    product = Product.query.filter(Product.product_name == p_name).first() # if this returns a user, then the email already exists in database
+    if product:
+        db.session.delete(product)
+        db.session.commit()
+        return True
+    return False
