@@ -2,12 +2,11 @@ from flask import Flask
 from flask_jwt import JWT
 from flask import session
 from datetime import timedelta 
-from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
+from flask_uploads import configure_uploads
 from flask_cors import CORS
 import pyrebase
 
-'''from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()'''
+
 from App.models.database import *
 
 from App.models.user import *
@@ -25,6 +24,7 @@ from App.views import (
     customer_views
 )
 
+#Google Firebase configuration file.
 config = {
     "apiKey": "AIzaSyBruhgawt6_iJxE-HPakjMtrXRrjxeVrhA",
     "authDomain": "uwi-pharmacy-ecommerce.firebaseapp.com",
@@ -57,18 +57,14 @@ def create_app():
     app.config['JWT_EXPIRATION_DELTA'] = timedelta(days=CONFIG['JWTdeltaDays'])
     app.config['PREFERRED_URL_SCHEME'] = 'https'
     app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
-    #sess = Session()
-    #sess.init_app(app)
-    photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
-    configure_uploads(app, photos)
+    #photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
+    #configure_uploads(app, photos)
     db.init_app(app)
     return app
 
 app = create_app()
 
 app.app_context().push()
-
-#db.create_all(app=app)
 
 app.register_blueprint(api_views)
 app.register_blueprint(product_views)

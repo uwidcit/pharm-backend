@@ -1,6 +1,7 @@
 import xlrd
 import pandas as pd
 
+# This function is used to Parse the Excel file that loads in products
 def parse():
     print('In parse script')
     loc = 'App/pharmdb.xlsx'

@@ -1,6 +1,10 @@
 from .database import db
 from werkzeug.security import generate_password_hash, check_password_hash
 
+#These are the roles for the users
+#Customer - role=1 can add products, checkout and view orders
+#Admins - role =2 Customer + manage products, orders and customers
+
 ACCESS = {
     'user': 1,
     'admin': 2

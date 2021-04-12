@@ -15,18 +15,20 @@ from App.controllers import (
     update_order_by_id,
 )
 
-
+# get all orders
 @order_views.route('/orders', methods=["GET"])
 def display_orders():
     orderList = get_orders()
     return jsonify(orderList)
 
+# get user orders
 @order_views.route('/user-orders', methods=["GET"])
 @jwt_required()
 def display_user_orders():
     orderList = get_orders_by_user(current_identity.email)
     return jsonify(orderList)
 
+# create order
 @order_views.route('/create-order', methods=["POST"])
 @jwt_required()
 def create_order():
@@ -46,12 +48,14 @@ def create_order():
     
     return jsonify(newOrder.toDict())
 
+# get specific order by ID
 @order_views.route('/order', methods=["GET"])
 def get_order():
     order_id = request.args.get("id")
     order = get_order_by_id(order_id)
     return jsonify(order.toDict())
 
+# update order status endpoint
 @order_views.route('/update-order', methods=["PUT"])
 def update_order():
     order_id = request.json.get("id")

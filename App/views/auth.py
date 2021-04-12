@@ -9,14 +9,18 @@ from App.controllers import (
     get_user,
 )
 
+# Test to get user email
 @auth_views.route('/user')
 @jwt_required()
 def get_user_details():
     user = get_user(current_identity.email)
     return jsonify(user.toDict())
 
+
+#Sign up endpoint
 @auth_views.route('/signup', methods=["POST"])
 def signup():
+    #get user's data from form
     first_name = request.json.get('fname')
     last_name = request.json.get('lname')
     email = request.json.get('email')
@@ -32,5 +36,6 @@ def signup():
     if user: # if a user is found, abort
         abort(400)
     
+    #create user and jsonify their information for storage
     newUser = create_user(first_name, last_name, email, password, allergies, medicines, role = 1)
     return jsonify(newUser.toDict())
