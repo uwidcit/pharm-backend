@@ -6,22 +6,37 @@ order_views = Blueprint('order_views', __name__, template_folder='../templates')
 
 from App.controllers import (
     get_user,
-    create_order,
+    create_cust_order,
     get_orders,
+    get_orders_by_user,
     get_product_by_slug,
-    get_users,
     create_order_product,
-    get_order_by_id
+    get_order_by_id,
+    update_order_by_id,
 )
 
+# get all orders
+@order_views.route('/orders', methods=["GET"])
+def display_orders():
+    orderList = get_orders()
+    return jsonify(orderList)
+
+# get user orders
+@order_views.route('/user-orders', methods=["GET"])
+@jwt_required()
+def display_user_orders():
+    orderList = get_orders_by_user(current_identity.email)
+    return jsonify(orderList)
+
+# create order
 @order_views.route('/create-order', methods=["POST"])
 @jwt_required()
-def order():
+def create_order():
     item_count = request.json.get('item_count')
     order_total = request.json.get('order_total')
     status = request.json.get('status')
     customer = get_user(current_identity.email) #parent
-    newOrder = create_order(customer, item_count, order_total, status) #association
+    newOrder = create_cust_order(customer, item_count, order_total, status) #association
 
     cart = request.json.get('cart') #call get product by slug for list of products
     for product in cart:
@@ -33,18 +48,19 @@ def order():
     
     return jsonify(newOrder.toDict())
 
-@order_views.route('/orders', methods=["GET"])
-def display_orders():
-    orderList = get_orders()
-    return jsonify(orderList)
-
+# get specific order by ID
 @order_views.route('/order', methods=["GET"])
 def get_order():
     order_id = request.args.get("id")
     order = get_order_by_id(order_id)
     return jsonify(order.toDict())
 
-@order_views.route('/users', methods=["GET"])
-def display_users():
-    userList = get_users()
-    return jsonify(userList)
+# update order status endpoint
+@order_views.route('/update-order', methods=["PUT"])
+def update_order():
+    order_id = request.json.get("id")
+    status = request.json.get("status")
+    order = update_order_by_id(order_id, status)
+    return jsonify(order.toDict())
+
+

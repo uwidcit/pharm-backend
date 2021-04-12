@@ -7,24 +7,26 @@ auth_views = Blueprint('auth_views', __name__, template_folder='../templates')
 from App.controllers import (
     create_user,
     get_user,
-    create_customer,
-    get_user_details,
 )
 
+# Test to get user email
 @auth_views.route('/user')
 @jwt_required()
-def getUserDetails():
-    user = get_user_details(current_identity.id)
+def get_user_details():
+    user = get_user(current_identity.email)
     return jsonify(user.toDict())
 
+
+#Sign up endpoint
 @auth_views.route('/signup', methods=["POST"])
 def signup():
+    #get user's data from form
     first_name = request.json.get('fname')
     last_name = request.json.get('lname')
     email = request.json.get('email')
     password = request.json.get('password')
     allergies = request.json.get('allergies')
-    medications = request.json.get('medications')
+    medicines = request.json.get('medications')
     
     if email is None or password is None: #missing arguments
         abort(400) 
@@ -34,7 +36,6 @@ def signup():
     if user: # if a user is found, abort
         abort(400)
     
-    newUser = create_user(first_name, last_name, email, password)
-    newCustomer = create_customer(newUser, allergies, medications)
-    return jsonify(newCustomer.toDict())
-
+    #create user and jsonify their information for storage
+    newUser = create_user(first_name, last_name, email, password, allergies, medicines, role = 1)
+    return jsonify(newUser.toDict())

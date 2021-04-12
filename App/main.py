@@ -1,14 +1,12 @@
 from flask import Flask
-from flask_jwt import JWT, jwt_required, current_identity
+from flask_jwt import JWT
 from flask import session
-#from flask_session import Session
 from datetime import timedelta 
-from flask_uploads import UploadSet, configure_uploads, IMAGES, TEXT, DOCUMENTS
+from flask_uploads import configure_uploads
 from flask_cors import CORS
+import pyrebase
 
 
-'''from flask_sqlalchemy import SQLAlchemy
-db = SQLAlchemy()'''
 from App.models.database import *
 
 from App.models.user import *
@@ -26,6 +24,28 @@ from App.views import (
     customer_views
 )
 
+#Google Firebase configuration file.
+config = {
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "projectId": "",
+    "storageBucket": "",
+    "messagingSenderId": "",
+    "appId": "",
+    "measurementId": ""
+  }
+
+firebase = pyrebase.initialize_app(config)
+
+storage = firebase.storage()
+
+#to store image
+#storage.child("image-url-on-firebase").put("image-name.jpg") (png whatever file extension")
+
+#to download image
+#storage.child("image-url-on-firebase").download("image-name.jpg")
+
 def create_app():
     app = Flask(__name__, static_url_path='')
     cors = CORS(app, resources={r"/*": {"origins": "*"}})
@@ -37,18 +57,14 @@ def create_app():
     app.config['JWT_EXPIRATION_DELTA'] = timedelta(days=CONFIG['JWTdeltaDays'])
     app.config['PREFERRED_URL_SCHEME'] = 'https'
     app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
-    #sess = Session()
-    #sess.init_app(app)
-    photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
-    configure_uploads(app, photos)
+    #photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
+    #configure_uploads(app, photos)
     db.init_app(app)
     return app
 
 app = create_app()
 
 app.app_context().push()
-
-#db.create_all(app=app)
 
 app.register_blueprint(api_views)
 app.register_blueprint(product_views)
