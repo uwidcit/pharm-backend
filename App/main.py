@@ -26,14 +26,14 @@ from App.views import (
 
 #Google Firebase configuration file.
 config = {
-    "apiKey": "AIzaSyBruhgawt6_iJxE-HPakjMtrXRrjxeVrhA",
-    "authDomain": "uwi-pharmacy-ecommerce.firebaseapp.com",
-    "databaseURL": "https://uwi-pharmacy-ecommerce-default-rtdb.firebaseio.com/",
-    "projectId": "uwi-pharmacy-ecommerce",
-    "storageBucket": "uwi-pharmacy-ecommerce.appspot.com",
-    "messagingSenderId": "94896011302",
-    "appId": "1:94896011302:web:22dcf5253859ce907c0ee7",
-    "measurementId": "G-F595XTT5R4"
+    "apiKey": "",
+    "authDomain": "",
+    "databaseURL": "",
+    "projectId": "",
+    "storageBucket": "",
+    "messagingSenderId": "",
+    "appId": "",
+    "measurementId": ""
   }
 
 firebase = pyrebase.initialize_app(config)
