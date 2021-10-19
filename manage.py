@@ -1,6 +1,7 @@
 from flask_script import Manager
 from flask_migrate import Migrate, MigrateCommand
 from App.main import app, db
+from App import CONFIG
 
 from App.controllers import (
     parse_excel,
@@ -16,15 +17,8 @@ migrate = Migrate(app, db)
 #add migrate command
 manager.add_command('db', MigrateCommand)
 
-#add initDB command
-@manager.command
-def initDB():
-    db.create_all(app=app)
-    print('database initialized!')
-
 @manager.command
 def addAdmin():
-
     admin = create_user("Andhra", "Maraj", 
     "andhra.maraj@gmail.com", "andhrapass", None, None, role = 2)
     return admin
@@ -53,6 +47,21 @@ def getProducts():
 @manager.command
 def deleteProducts():
     x = delete_products()
+
+@manager.command
+def start():
+    print('Application running in '+CONFIG['ENV']+' mode')
+    app.run(host='0.0.0.0', port=8080, debug=CONFIG['DEBUG'])
+
+#add initDB command
+@manager.command
+def initDB():
+    db.create_all(app=app)
+    print('database initialized!')
+    addAdmin()
+    print('admin user created u:andhra.maraj@gmail.com p:andhrapass')
+    addProducts()
+    print('products loaded!')
 
 if __name__ == "__main__":
     manager.run()

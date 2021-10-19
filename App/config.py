@@ -3,21 +3,14 @@ import json, os
 CONFIG = None
 
 environment = os.environ.get('ENV')
-if environment is None:
-    environment = 'staging'
-    with open('environment.'+environment+'.json') as config_file:
-        CONFIG = json.load(config_file)
-else:
-    #configuration for local encironment
+if environment == 'production' or environment == 'staging':
     CONFIG = {
-        "dbhost" : os.environ.get('DBHOST'),
-        "debug" : True,
-        "JWTdeltaDays": 7,
-        "uploadDir":"App/uploads/",
-        "dbname" : os.environ.get('DBNAME'),
-        "dbuser" : os.environ.get('DBUSER'),
-        "secret_key" : os.environ.get('SECRET_KEY'),
-        "dbpassword": os.environ.get('DBPASSWORD'),
-        "dbport" : 3306
+        "DEBUG" : False,
+        "JWT_EXPIRATION_DELTA": 7,
+        "SECRET_KEY" : os.environ.get('SECRET_KEY'),
+        "SQLALCHEMY_DATABASE_URI" : os.environ.get('SQLALCHEMY_DATABASE_URI'),
+        "ENV":'production'
     }
-CONFIG['ENV']=environment
+else:
+    with open('environment.staging.json') as config_file:
+        CONFIG = json.load(config_file)

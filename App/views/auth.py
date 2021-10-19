@@ -16,7 +16,6 @@ def get_user_details():
     user = get_user(current_identity.email)
     return jsonify(user.toDict())
 
-
 #Sign up endpoint
 @auth_views.route('/signup', methods=["POST"])
 def signup():
@@ -36,6 +35,7 @@ def signup():
     if user: # if a user is found, abort
         abort(400)
     
+    print('creating new user')
     #create user and jsonify their information for storage
     newUser = create_user(first_name, last_name, email, password, allergies, medicines, role = 1)
     return jsonify(newUser.toDict())

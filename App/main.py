@@ -2,7 +2,6 @@ from flask import Flask
 from flask_jwt import JWT
 from flask import session
 from datetime import timedelta 
-from flask_uploads import configure_uploads
 from flask_cors import CORS
 import pyrebase
 
@@ -49,14 +48,17 @@ storage = firebase.storage()
 def create_app():
     app = Flask(__name__, static_url_path='')
     cors = CORS(app, resources={r"/*": {"origins": "*"}})
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://'+CONFIG['dbuser']+':'+CONFIG['dbpassword']+'@'+CONFIG['dbhost']+'/'+CONFIG['dbname']
+ 
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     app.config["TEMPLATES_AUTO_RELOAD"] = True
-    app.config['SECRET_KEY'] = CONFIG['secret_key']
-    app.config['UPLOADED_PHOTOS_DEST'] = CONFIG['uploadDir']
-    app.config['JWT_EXPIRATION_DELTA'] = timedelta(days=CONFIG['JWTdeltaDays'])
     app.config['PREFERRED_URL_SCHEME'] = 'https'
     app.config['JWT_AUTH_USERNAME_KEY'] = 'email'
+    app.config['UPLOADED_PHOTOS_DEST'] = 'uploads',
+
+    app.config['SQLALCHEMY_DATABASE_URI'] =  CONFIG["SQLALCHEMY_DATABASE_URI"]
+    app.config['SECRET_KEY'] = CONFIG['SECRET_KEY']
+    app.config['JWT_EXPIRATION_DELTA'] = timedelta(days=CONFIG["JWT_EXPIRATION_DELTA"])
+    app.config['DEBUG'] = CONFIG["DEBUG"]
     #photos = UploadSet('photos', TEXT + DOCUMENTS + IMAGES)
     #configure_uploads(app, photos)
     db.init_app(app)
@@ -77,4 +79,4 @@ jwt = JWT(app, authenticate, identity)
 
 if __name__ == '__main__':
     print('Application running in '+CONFIG['ENV']+' mode')
-    app.run(host='0.0.0.0', port=8080, debug=CONFIG['debug'])
+    app.run(host='0.0.0.0', port=8080, debug=CONFIG['DEBUG'])

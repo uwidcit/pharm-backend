@@ -23,11 +23,11 @@ class Product(db.Model):
             "product_name": self.product_name,
             "category": self.category,
             "supplier": self.supplier,
-            "supplier_cost_price": self.supplier_cost_price,
+            "supplier_cost_price": round(self.supplier_cost_price,2),
             "QoH": self.QoH,
             "stock_unit": self.stock_unit,
-            "unit_retail_price": self.unit_retail_price,
-            "total_retail_price": self.total_retail_price,
+            "unit_retail_price": round(self.unit_retail_price,2),
+            "total_retail_price": round(self.total_retail_price,2),
             "image" : self.image,
             "slug" : self.product_name.lower().replace(' ', '-')
             # uncomment for all orders containing the product "orders": [OrderProduct.order.toDict() for OrderProduct in self.orders]

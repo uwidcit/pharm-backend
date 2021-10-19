@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+from flask_jwt import jwt_required
 
 product_views = Blueprint('product_views', __name__, template_folder='../templates')
 
@@ -10,7 +11,7 @@ from App.controllers import (
     delete_product_by_slug
 )
 
-#get 20 products based on page # 
+#get 20 products based on page
 @product_views.route('/products', methods=["GET"])
 def display_event():
     page = request.args.get('page')
@@ -35,10 +36,13 @@ def display_categories():
 def get_product():
     product_slug = request.args.get("slug")
     product = get_product_by_slug(product_slug)
+    if product is None:
+        return jsonify({ 'message' :'product not found' }), 404
     return jsonify(product.toDict())
 
 # create product - wasn't fully implemented due to Firebase not setup
 @product_views.route('/create-product', methods=["POST"])
+@jwt_required()
 def create_product():
     code = request.json.get("code")
     name = request.json.get("name")
