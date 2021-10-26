@@ -6,11 +6,15 @@ class Order(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     user = db.relationship("User", back_populates="orders")
-    item_count = db.Column(db.Integer, nullable=False)
-    order_total = db.Column(db.Float(decimal_return_scale=2), nullable=False)
     date_placed = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     pickup_status = db.Column(db.String(50), nullable=False)
-    products = db.relationship("OrderProduct", back_populates="order",  cascade="all,delete")
+    products = db.relationship("ProductOrder", back_populates="order",  cascade="all,delete")
+
+    def get_total():
+        pass
+
+    def get_invoice():
+        pass
 
     def toDict(self):
         return{

@@ -24,7 +24,7 @@ If environment.staging.json does not exist, it must be created in the root direc
     "SQLALCHEMY_DATABASE_URI" : <url_to_database> or "sqlite:///test.db",
     "SECRET_KEY" : <some custom key text>,
     "JWT_EXPIRATION_DELTA" : <num days jwt should expire>,
-    "DEBUG": true
+    "DEBUG": true,
     "ENV" : "staging"
 }
 ```

@@ -18,7 +18,6 @@ def get_customers_by_term(term):
     customers = User.query.filter(
         (User.role.contains(1)) &
         (User.allergies.contains(term) 
-        | User.medicines.contains(term) 
         | User.email.contains(term)
         | User.first_name.contains(term)
         | User.last_name.contains(term))

@@ -34,6 +34,7 @@ config = {
     "appId": "",
     "measurementId": ""
   }
+  
 
 firebase = pyrebase.initialize_app(config)
 

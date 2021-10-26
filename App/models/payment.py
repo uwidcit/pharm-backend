@@ -4,14 +4,13 @@ from .database import db
 
 class Payment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    status = db.Column(db.String(50), nullable=False)
-    amount_paid = db.Column(db.Integer, nullable=False)
-    date_paid = db.Column(db.DateTime(), nullable=False)
+    order_id = db.Column(db.Integer, db.ForeignKey('order.id'), primary_key=True)
+    order = db.relationship('Order', backref='payment', lazy=True) 
+    timestamp = db.Column(db.DateTime(), nullable=False, default=datetime.now)
     
     def toDict(self):
         return {
             "id": self.id,
-            "status": self.status,
-            "amount_paid": self.amount_paid,
-            "date_paid": self.date_paid
+            "order": self.order.toDict(),
+            "timestamp": self.timestamp
         }

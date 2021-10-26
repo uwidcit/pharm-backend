@@ -25,7 +25,6 @@ def signup():
     email = request.json.get('email')
     password = request.json.get('password')
     allergies = request.json.get('allergies')
-    medicines = request.json.get('medications')
     
     if email is None or password is None: #missing arguments
         abort(400) 
@@ -37,5 +36,5 @@ def signup():
     
     print('creating new user')
     #create user and jsonify their information for storage
-    newUser = create_user(first_name, last_name, email, password, allergies, medicines, role = 1)
+    newUser = create_user(first_name, last_name, email, password, allergies, role = 1)
     return jsonify(newUser.toDict())
